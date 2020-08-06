@@ -1,0 +1,8 @@
+Create function add, substract, multiply and divide
+
+function operate(num1, num1, operator)
+
+Get input:
+addEventListener button (get innerHTML value)
+Save in variable
+Display variable
