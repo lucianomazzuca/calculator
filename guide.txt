@@ -6,3 +6,17 @@ Get input:
 addEventListener button (get innerHTML value)
 Save in variable
 Display variable
+
+
+
+Get operan1:
+    addEventListener button (get innerHTML value)
+    Save in variable
+    Display variable
+
+Once operator != ''
+    get operan2:
+        addEventListener button (get innerHTML value)
+        Save in variable
+        Display variable
+    
