@@ -20,3 +20,20 @@ Once operator != ''
         Save in variable
         Display variable
     
+
+delete:
+    if operator == ''
+        deleteLastValue()
+        updateDisplay
+        firstOperand = display.innerText 
+    else if operator != ''
+        deleteLastValue()
+        updateDisplay
+        secondOperand = display.innerText 
+
+result:
+    if(secondOperand != '') then
+        result = operate(firstOperand, secondOperand)
+        display(result)
+        clean firstOperand, secondOperand, operator.
+    

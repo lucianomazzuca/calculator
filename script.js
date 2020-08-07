@@ -1,33 +1,16 @@
-//Operations
-function sum(num1, num2){
-    return num1 + num2;
-}
-
-function substract(num1, num2){
-    return num1 - num2;
-}
-
-function multiply(num1, num2){
-    return num1 * num2;
-}
-
-function divide(num1, num2){
-    return num1 / num2;
-}
-
 function operate(num1, num2, operator){
     switch(true){
         case operator == '+':
-            return sum(num1, num2);
+            return num1 + num2;
             break;
         case operator == '-':
-            return substract(num1, num2);
+            return num1 - num2;
             break;
         case operator == '*':
-            return multiply(num1, num2);
+            return num1 * num2;;
             break;
         case operator == '/':
-            return divide(num1, num2);
+            return num1 / num2;
             break;
         default: 
             return 'Invalid operator'
@@ -36,33 +19,120 @@ function operate(num1, num2, operator){
 
 //Get input
 
-    const buttons = document.querySelectorAll('button')
-    const display = document.querySelector('.display')
-    let firstOperand = '';
-    let secondOperand = '';
-    let operator = '';
+const buttons = document.querySelectorAll('button')
+const display = document.querySelector('.display')
+let firstOperand = '';
+let secondOperand = '';
+let operator = '';
+let resultOperate = '';
 
 
-    buttons.forEach(btn => {
-        btn.addEventListener('click', function(e){
-            if(operator == '' && this.className == 'number'){
-                firstOperand += this.innerHTML;
-                display.innerText = firstOperand;
-                console.log(firstOperand)
-            }   
-            else if(operator == '' && this.className == 'operator'){
-                operator = this.innerHTML;
-                console.log(operator);
+function getFirstOperand(btnNumber){
+    firstOperand += btnNumber.innerText;
+    console.log(firstOperand)
+}
+
+function getSecondOperator(btnNumber){
+    secondOperand += btnNumber.innerText;
+    display.innerText = secondOperand;
+    console.log(secondOperand);
+}
+
+function getOperator(btn){
+    operator = btn.innerText;
+    display.innerText = operator;
+    console.log(operator);
+}
+
+function updateDisplay(value){
+    return display.innerText = value;
+}
+
+function clear(){
+    firstOperand = '';
+    secondOperand = '';
+    operator = '';
+    display.innerText = '';  
+}
+
+function deleteLastValue(){
+    let displayUpdated = display.innerText.slice(0, -1);
+    if(operator == ''){
+        firstOperand = displayUpdated;
+        updateDisplay(displayUpdated);
+    }
+    else if(operator != ''){
+        secondOperand = displayUpdated
+        updateDisplay(displayUpdated);
+    }
+}
+
+function result(){
+    if(secondOperand != ''){
+        resultOperate = operate(Number(firstOperand), Number(secondOperand),operator);
+        updateDisplay(resultOperate);
+        firstOperand = resultOperate,
+        secondOperand = '',
+        operator = '';
+    }
+}
+
+function action(event){
+    const btn = event.target;
+    switch(true){
+        case btn.className == 'number':
+            if(operator == ''){
+                getFirstOperand(btn);
+                updateDisplay(firstOperand);
+                break;
             }
-            else if(operator != '' && this.className == 'number'){
-                secondOperand += this.innerHTML;
-                display.innerText = secondOperand;
-                console.log(secondOperand);
+            else if(operator != ''){
+                getSecondOperator(btn);
+                updateDisplay(secondOperand);
+                break;
             }
-            else if(this.id == 'result'){
-                display.innerText = operate(Number(firstOperand), Number(secondOperand), operator)
+        case btn.className == 'operator':
+            if(firstOperand != ''){
+                getOperator(btn)
+                updateDisplay(operator);
+                break;
             }
-        })
-    })
+        case btn.id == 'result':
+            result();
+            break;
+        case btn.id == 'clear':
+            clear();
+            break;
+        case btn.id == 'delete':
+            deleteLastValue();
+            break;
+    }
+}
+
+buttons.forEach(btn => {
+    btn.addEventListener('click', action)
+})
     
 
+// switch(true){
+//     case operator == '' && btn.className == 'number':
+//         getFirstOperand(btn);
+//         updateDisplay(firstOperand);
+//         break;
+//     case operator == '' && btn.className == 'operator':
+//         getOperator(btn)
+//         updateDisplay(operator);
+//         break;
+//     case operator != '' && btn.className == 'number':
+//         getSecondOperator(btn);
+//         updateDisplay(secondOperand);
+//         break;
+//     case btn.id == 'result':
+//         result();
+//         break;
+//     case btn.id == 'clear':
+//         clear();
+//         break;
+//     case btn.id == 'delete':
+//         deleteLastValue();
+//         break;
