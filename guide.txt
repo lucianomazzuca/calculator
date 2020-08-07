@@ -37,3 +37,4 @@ result:
         display(result)
         clean firstOperand, secondOperand, operator.
     
+delete operator:

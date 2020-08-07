@@ -57,7 +57,12 @@ function clear(){
 
 function deleteLastValue(){
     let displayUpdated = display.innerText.slice(0, -1);
-    if(operator == ''){
+
+    if(firstOperand != '' && secondOperand == ''){
+        operator = displayUpdated;
+        updateDisplay(displayUpdated);
+    }
+    else if(operator == ''){
         firstOperand = displayUpdated;
         updateDisplay(displayUpdated);
     }
