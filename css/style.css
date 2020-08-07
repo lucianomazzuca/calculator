@@ -41,7 +41,7 @@ div.calculator{
 
 .calculator button{
     border-radius: 0%;
-    font-size: 20px;
+    font-size: 25px;
     border: 1px solid black;
 }
 
@@ -51,5 +51,9 @@ div.calculator{
 
 button.number{
     background-color: orange;
+}
+
+button #clear, #delete{
+    
 }
 
