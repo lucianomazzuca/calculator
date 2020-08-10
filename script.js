@@ -9,8 +9,16 @@ function operate(num1, num2, operator){
         case operator == '*':
             return num1 * num2;;
             break;
+        case operator == '%':
+            return num1 % num2;
+            break;
         case operator == '/':
-            return num1 / num2;
+                if(num2 == 0){
+                    return 'Error';
+                }
+                else{
+                    return num1 / num2;
+                }
             break;
         default: 
             return 'Invalid operator'
@@ -32,15 +40,13 @@ function getFirstOperand(btnNumber){
     console.log(firstOperand)
 }
 
-function getSecondOperator(btnNumber){
+function getSecondOperand(btnNumber){
     secondOperand += btnNumber.innerText;
-    display.innerText = secondOperand;
     console.log(secondOperand);
 }
 
 function getOperator(btn){
     operator = btn.innerText;
-    display.innerText = operator;
     console.log(operator);
 }
 
@@ -72,10 +78,22 @@ function deleteLastValue(){
     }
 }
 
+function decimal(btn){
+    if(secondOperand != '' && secondOperand.indexOf('.') == -1){
+        getSecondOperand(btn);
+        updateDisplay(secondOperand);
+    }
+    else if(firstOperand != '' && firstOperand.indexOf('.') == -1){
+        getFirstOperand(btn);
+        updateDisplay(firstOperand);
+    }
+}
+
 function result(){
     if(secondOperand != ''){
         resultOperate = operate(Number(firstOperand), Number(secondOperand),operator);
-        updateDisplay(resultOperate);
+        updateDisplay(Math.round((resultOperate + Number.EPSILON) * 100) / 100
+        );
         firstOperand = resultOperate,
         secondOperand = '',
         operator = '';
@@ -92,14 +110,17 @@ function action(event){
                 break;
             }
             else if(operator != ''){
-                getSecondOperator(btn);
+                getSecondOperand(btn);
                 updateDisplay(secondOperand);
                 break;
             }
         case btn.className == 'operator':
-            if(firstOperand != ''){
+            if(secondOperand != ''){
+                result()
                 getOperator(btn)
-                updateDisplay(operator);
+            }
+            else if(firstOperand != ''){
+                getOperator(btn)
                 break;
             }
         case btn.id == 'result':
@@ -110,6 +131,9 @@ function action(event){
             break;
         case btn.id == 'delete':
             deleteLastValue();
+            break;
+        case btn.id == 'decimalBtn':
+            decimal(btn);
             break;
     }
 }
@@ -129,7 +153,7 @@ buttons.forEach(btn => {
 //         updateDisplay(operator);
 //         break;
 //     case operator != '' && btn.className == 'number':
-//         getSecondOperator(btn);
+//         getSecondOperand(btn);
 //         updateDisplay(secondOperand);
 //         break;
 //     case btn.id == 'result':

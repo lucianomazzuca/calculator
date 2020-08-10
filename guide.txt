@@ -8,7 +8,6 @@ Save in variable
 Display variable
 
 
-
 Get operan1:
     addEventListener button (get innerHTML value)
     Save in variable
