@@ -58,22 +58,23 @@ function clear(){
     firstOperand = '';
     secondOperand = '';
     operator = '';
+    resultOperate = ''
     display.innerText = '';  
 }
 
 function deleteLastValue(){
     let displayUpdated = display.innerText.slice(0, -1);
 
-    if(firstOperand != '' && secondOperand == ''){
-        operator = displayUpdated;
+    if(operator != ''){
+        secondOperand = displayUpdated
         updateDisplay(displayUpdated);
     }
     else if(operator == ''){
         firstOperand = displayUpdated;
         updateDisplay(displayUpdated);
     }
-    else if(operator != ''){
-        secondOperand = displayUpdated
+    else if(firstOperand != '' && secondOperand == ''){
+        operator = displayUpdated;
         updateDisplay(displayUpdated);
     }
 }
@@ -87,6 +88,21 @@ function decimal(btn){
         getFirstOperand(btn);
         updateDisplay(firstOperand);
     }
+}
+
+function disableNumber(){
+    const numberBtn = document.querySelectorAll('.number');
+    numberBtn.forEach(number => {
+        number.disabled = true;
+    })
+}
+
+function enableNumber(){
+    const numberBtn = document.querySelectorAll('.number');
+
+    numberBtn.forEach(number => {
+        number.disabled = false;
+    })
 }
 
 function result(){
@@ -118,14 +134,13 @@ function action(event){
             if(secondOperand != ''){
                 result()
                 getOperator(btn)
+                break;
             }
             else if(firstOperand != ''){
                 getOperator(btn)
                 break;
             }
-        case btn.id == 'result':
-            result();
-            break;
+
         case btn.id == 'clear':
             clear();
             break;
@@ -135,12 +150,15 @@ function action(event){
         case btn.id == 'decimalBtn':
             decimal(btn);
             break;
+        case btn.id == 'result':
+            result();
+            break;
     }
 }
 
 buttons.forEach(btn => {
     btn.addEventListener('click', action)
-})
+});
     
 
 // switch(true){

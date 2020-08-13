@@ -50,16 +50,21 @@ div.calculator{
 }
 
 button.number{
-    background-color: orange;
+    background-color: rgb(231, 231, 231);
+}
+
+.calculator #decimalBtn{
+    background-color: rgb(231, 231, 231);
 }
 
 .calculator #btn0{
     grid-column: 1/3;
 }
 
-.calculator #decimalBtn{
+.calculator .operator, #result{
     background-color: orange;
 }
 
-.calculator .operator{
+.calculator #clear, #delete{
+    background-color: rgb(252, 90, 90);
 }

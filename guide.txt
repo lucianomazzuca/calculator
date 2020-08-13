@@ -37,3 +37,7 @@ result:
         clean firstOperand, secondOperand, operator.
     
 delete operator:
+
+
+after pressing =:
+    
